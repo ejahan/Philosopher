@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/08 04:45:05 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/10 00:43:37 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ typedef struct s_philo
 	
 }	t_philo;
 
-t_philo	*parsing(int ac, char **av, t_philo *philo);
+void	parsing(int ac, char **av, t_philo *philo);
 long	ft_atoi(const char *str);
-int		check_digit(char *str);
-int		check_max(char *str);
-int		check_int(char **av, int ac);
 int		ft_isdigit(int c);
 
 #endif
