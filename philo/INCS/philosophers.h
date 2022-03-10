@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/10 00:43:37 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/10 05:13:01 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,25 @@
 
 typedef struct s_philo
 {
-	int	error;
-	int	number_of_philosophers;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
-	int	exist;
-	int	number_of_times_each_philosopher_must_eat;
-	
+	pthread_mutex_t	fork;
+	pthread_t		thread;
+	int				time;
 }	t_philo;
 
-void	parsing(int ac, char **av, t_philo *philo);
+typedef struct s_data
+{
+	int		error;
+	int		number_of_philosophers;
+	int		time_to_die;
+	int		time_to_eat;
+	int		time_to_sleep;
+	int		exist;
+	int		number_of_times_each_philosopher_must_eat;
+	t_philo	*philo;
+	
+}	t_data;
+
+void	parsing(int ac, char **av, t_data *data);
 long	ft_atoi(const char *str);
 int		ft_isdigit(int c);
 

@@ -6,7 +6,7 @@
 #    By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/08 00:00:23 by ejahan            #+#    #+#              #
-#    Updated: 2022/03/10 00:40:27 by ejahan           ###   ########.fr        #
+#    Updated: 2022/03/10 05:14:23 by ejahan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ CFLAGS	=	-Wall -Wextra -Werror #-g3 -fsanitize=address
 all:		${NAME}
 
 ${NAME}:	${OBJS}
-			$(CC) ${CFLAGS} $(OBJS) -I $(INCS) -o $(NAME)
+			$(CC) -lpthread ${CFLAGS} $(OBJS) -I $(INCS) -o $(NAME)
 
 .c.o:
 			${CC} ${CFLAGS} -c $< -o $@ -I ${INCS}

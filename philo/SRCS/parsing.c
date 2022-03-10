@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 00:38:45 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/10 00:44:41 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/10 01:33:20 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,28 +82,28 @@ static int	check_int(char **av, int ac)
 	return (0);
 }
 
-void	parsing(int ac, char **av, t_philo *philo)
+void	parsing(int ac, char **av, t_data *data)
 {
-	philo->error = 0;
+	data->error = 0;
 	if (check_int(av, ac) == -1)
 	{
-		philo->error = 1;
+		data->error = 1;
 		return ;
 	}
-	philo->number_of_philosophers = (int)ft_atoi(av[1]);
-	if (philo->number_of_philosophers < 1)
+	data->number_of_philosophers = (int)ft_atoi(av[1]);
+	if (data->number_of_philosophers < 1)
 	{
 		printf("to few philosophers :(\n");
-		philo->error = 1;
+		data->error = 1;
 		return ;
 	}
-	philo->time_to_die = (int)ft_atoi(av[2]);
-	philo->time_to_eat = (int)ft_atoi(av[3]);
-	philo->time_to_sleep = (int)ft_atoi(av[4]);
-	philo->exist = 0;
+	data->time_to_die = (int)ft_atoi(av[2]);
+	data->time_to_eat = (int)ft_atoi(av[3]);
+	data->time_to_sleep = (int)ft_atoi(av[4]);
+	data->exist = 0;
 	if (ac == 6)
 	{
-		philo->number_of_times_each_philosopher_must_eat = (int)ft_atoi(av[5]);
-		philo->exist = 1;
+		data->number_of_times_each_philosopher_must_eat = (int)ft_atoi(av[5]);
+		data->exist = 1;
 	}
 }

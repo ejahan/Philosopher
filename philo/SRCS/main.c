@@ -6,32 +6,61 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 00:31:06 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/10 00:45:29 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/10 05:27:00 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/philosophers.h"
 
-int	philosophers(int ac, char **av, t_philo *philo)
+void	*fonction(void *data)
 {
-	parsing(ac, av, philo);
-	if (philo->error == 1)
+	printf("je sais pas si ca veut dire que ca marche bien mais cest cool\n");
+	return (data);
+}
+
+t_philo	*init_philo(t_data *data)
+{
+	t_philo	*philo;
+	int		i;
+
+	i = 0;
+	philo = malloc(sizeof(t_philo) * (data->number_of_philosophers));
+	if (philo == NULL)
+		return (NULL);
+	while (i < data->number_of_philosophers)
+	{
+		if (pthread_create(&philo[i].thread, NULL, &fonction, data) != 0)
+			return (NULL);
+		i++;
+	}
+	i = 0;
+	while (i < data->number_of_philosophers)
+	{
+		if (pthread_join(philo[i].thread, NULL) != 0)
+			return (NULL);
+		i++;
+	}
+	return (philo);
+}
+
+int	philosophers(int ac, char **av, t_data *data)
+{
+	parsing(ac, av, data);
+	if (data->error == 1)
 		return (-1);
-	if (philo->number_of_times_each_philosopher_must_eat == 0
-		&& philo->exist == 1)
+	if (data->number_of_times_each_philosopher_must_eat == 0
+		&& data->exist == 1)
 		return (0);
-	printf("num of philo = %d\n", philo->number_of_philosophers);
-	printf("die = %d\n", philo->time_to_die);
-	printf("eat = %d\n", philo->time_to_eat);
-	printf("sleep = %d\n", philo->time_to_sleep);
-	if (philo->exist == 1)
-		printf("num of time = %d\n", philo->number_of_times_each_philosopher_must_eat);
+	data->philo = init_philo(data);
+	if (data->philo == NULL)
+		return (-1);
+	free(data->philo);
 	return (0);
 }
 
 int	main(int ac, char **av)
 {
-	t_philo	philo;
+	t_data	data;
 
 	(void)av;
 	if (ac != 5 && ac != 6)
@@ -39,7 +68,7 @@ int	main(int ac, char **av)
 		printf("wrong number of arguments\n");
 		return (1);
 	}
-	if (philosophers(ac, av, &philo) == -1)
+	if (philosophers(ac, av, &data) == -1)
 		return (1);
 	return (0);
 }
@@ -50,9 +79,10 @@ int	main(int ac, char **av)
 // time_to_sleep
 // [number_of_times_each_philosopher_must_eat]
 
-	// printf("num of philo = %d\n", philo.number_of_philosophers);
-	// printf("die = %d\n", philo.time_to_die);
-	// printf("eat = %d\n", philo.time_to_eat);
-	// printf("sleep = %d\n", philo.time_to_sleep);
-	// if (philo.exist == 1)
-	// 	printf("num of time = %d\n", philo.number_of_times_each_philosopher_must_eat);
+	// printf("num of philo = %d\n", data->number_of_philosophers);
+	// printf("die = %d\n", data->time_to_die);
+	// printf("eat = %d\n", data->time_to_eat);
+	// printf("sleep = %d\n", data->time_to_sleep);
+	// if (data->exist == 1)
+	// 	printf("num of time = %d\n",
+			// data->number_of_times_each_philosopher_must_eat);

@@ -1,6 +1,23 @@
 
 
->>>>	PHILOSCAR
+quand un philo a fini de manger -> sleep pendant time_to_sleep ms
+
+
+un philo -> son temps (manger/dormir/mourir)
+			son thread
+
+
+
+
+
+
+
+
+
+
+						=================================
+						>>>>>>>>	PHILOSCAR	 <<<<<<<<
+						=================================
 
 
 1 - PARSING
@@ -43,7 +60,7 @@
 		repas
 	- boucle while (normalent infinie) qui definit la routine. Les conditions 
 		sont : est ce qu'il y a un mort ou est ce que tout le monde a mangé assez.
-	- IMPORTANT : dansles conditons du while (ou des if) mettre des fonctions qui 
+	- IMPORTANT : dans les conditons du while (ou des if) mettre des fonctions qui 
 		vont pouvoir mutex.
 
 
@@ -68,10 +85,9 @@
 	- Lock les mutex pour lire les donnés propres a data et aux philos
 	- Verifier la difference entre le temps actuel et le temps du dernier repas
 	- Si ce temps est supérieur au temps de mort, et s'il n'y a pas deja quelqu'un 
-		de mort et qu'ils n;ont pas mangé assez,
-	alors passer l'interrupteur de mort a 1.
+		de mort et qu'ils n;ont pas mangé assez, alors passer l'interrupteur de mort a 1.
 	- Print le message de mort avec le get time global.
-	-Relacher les mutex.
+	- Relacher les mutex.
 
 
 7 - RAPPEL
@@ -80,3 +96,6 @@
 	- Penser a utiliser des fonctions is dead ou has eaten enough pour pouvoir mutex 
 		dans ses conditions
 	- MUTEX POUR CHAQUE VALEUR MODIFIABLE QUE CE SOIT EN LECTURE COMME EN ECRITURE
+
+
+
