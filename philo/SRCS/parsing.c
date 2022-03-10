@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 00:38:45 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/10 01:33:20 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/10 10:38:42 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,19 @@ static int	check_int(char **av, int ac)
 	return (0);
 }
 
+void	too_low(t_data *data)
+{
+	if (data->number_of_philosophers < 1)
+		printf("too few philosophers\n");
+	if (data->number_of_philosophers > 200)
+		printf("trop de philosophers\n");
+	if (data->time_to_die < 60 || data->time_to_eat < 60
+		|| data->time_to_sleep < 60)
+		printf("time trop court\n");
+	data->error = 1;
+	return ;
+}
+
 void	parsing(int ac, char **av, t_data *data)
 {
 	data->error = 0;
@@ -91,15 +104,16 @@ void	parsing(int ac, char **av, t_data *data)
 		return ;
 	}
 	data->number_of_philosophers = (int)ft_atoi(av[1]);
-	if (data->number_of_philosophers < 1)
-	{
-		printf("to few philosophers :(\n");
-		data->error = 1;
-		return ;
-	}
 	data->time_to_die = (int)ft_atoi(av[2]);
 	data->time_to_eat = (int)ft_atoi(av[3]);
 	data->time_to_sleep = (int)ft_atoi(av[4]);
+	if (data->number_of_philosophers < 1 || data->time_to_die < 60
+		|| data->time_to_eat < 60 || data->time_to_sleep < 60
+		|| data->number_of_philosophers > 200)
+	{
+		too_low(data);
+		return ;
+	}
 	data->exist = 0;
 	if (ac == 6)
 	{
