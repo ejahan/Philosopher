@@ -6,7 +6,7 @@
 #    By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/08 00:00:23 by ejahan            #+#    #+#              #
-#    Updated: 2022/03/10 05:14:23 by ejahan           ###   ########.fr        #
+#    Updated: 2022/03/10 06:12:10 by ejahan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME	=	philo
 
 INCS	=	./INCS/philosophers.h
 
-SRCS	=	./SRCS/main.c ./SRCS/utils.c ./SRCS/parsing.c \
+SRCS	=	./SRCS/main.c ./SRCS/utils.c ./SRCS/parsing.c ./SRCS/init.c \
+			./SRCS/jsp_encore.c
 
 OBJS	=	${SRCS:.c=.o}
 

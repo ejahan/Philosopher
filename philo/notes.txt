@@ -1,26 +1,11 @@
 
 
-quand un philo a fini de manger -> sleep pendant time_to_sleep ms
-
-
-un philo -> son temps (manger/dormir/mourir)
-			son thread
-
-
-
-
-
-
-
-
-
-
 						=================================
 						>>>>>>>>	PHILOSCAR	 <<<<<<<<
 						=================================
 
 
-1 - PARSING
+1 - PARSING													>>>>> ok?
 	- verifier que c'est que des chiffres.
 	- verifier les int max
 	- proteger + de 200 philos et - de 60 ms
