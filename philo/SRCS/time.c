@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   jsp_encore.c                                       :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/10 06:10:37 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/10 10:45:30 by ejahan           ###   ########.fr       */
+/*   Created: 2022/03/15 02:22:45 by ejahan            #+#    #+#             */
+/*   Updated: 2022/03/15 03:28:20 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/philosophers.h"
 
-void	*fonction(void *data)
+long	get_time(long start_time)
 {
-	struct timeval	time;
+	long	time;
 
-	gettimeofday(&time, NULL);
-	// printf("je sais pas si ca veut dire que ca marche bien mais cest cool\n");
-	printf("time = %ld\n", time.tv_sec);
-	return (data);
+	time = 0;
+	return (time);
 }

@@ -41,7 +41,7 @@
 
 4 - ROUTINE
 	- Verifier si c'est des philos pairs ou impairs pour un lancement opti
-	- Creer la chrono propre a chque philo, il sera réinitialisé a chaque fin de 
+	- Creer la chrono propre a chaque philo, il sera réinitialisé a chaque fin de 
 		repas
 	- boucle while (normalent infinie) qui definit la routine. Les conditions 
 		sont : est ce qu'il y a un mort ou est ce que tout le monde a mangé assez.
@@ -81,6 +81,63 @@
 	- Penser a utiliser des fonctions is dead ou has eaten enough pour pouvoir mutex 
 		dans ses conditions
 	- MUTEX POUR CHAQUE VALEUR MODIFIABLE QUE CE SOIT EN LECTURE COMME EN ECRITURE
+
+
+
+
+
+
+
+=======================================================================================
+***************************************************************************************
+=======================================================================================
+
+
+============
+GETTIMEOFDAY
+
+struct timeval {
+    time_t      tv_sec;  -> secondes
+    suseconds_t tv_usec; -> microsecondes
+};
+
+
+
+
+
+
+
+
+=======================================================================================
+***************************************************************************************
+=======================================================================================
+
+
+data -> 	time to die
+			time to sleep
+			time to eat
+			nbr of philo
+			error
+			mutex *forks
+			t_philo *philo
+			start time
+			mutex dead
+
+t_philo	->	*data
+			nb
+			thread philo
+			int fork_right
+			int fork_left
+			time
+			time last meal
+
+
+=======================================================================================
+***************************************************************************************
+=======================================================================================
+
+
+
 
 
 
