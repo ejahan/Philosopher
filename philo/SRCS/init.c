@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:07:07 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 06:13:11 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 09:19:22 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_philo	*init_philo(t_struct *all)
 	{
 		philo[i].nb = i + 1;
 		if (philo[i].nb == 1)
-			philo[i].fork_right = all->data.number_of_philosophers;
+			philo[i].fork_right = all->data.number_of_philosophers - 1;
 		else
-			philo[i].fork_right = philo[i].nb - 1;
-		philo[i].fork_left = philo[i].nb;
+			philo[i].fork_right = i - 1;
+		philo[i].fork_left = i;
 		philo[i].nb_of_meal = 0;
 		philo[i].data = &all->data;
 		i++;

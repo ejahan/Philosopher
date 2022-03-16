@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 03:33:35 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 06:59:19 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 09:27:00 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	philo_sleep(t_philo *philo, int nb)
 	long long int	i;
 
 	i = get_time(philo->time);
+	(void)nb;
 	printf("\033[1;34m%lld %d is sleeping\033[0m\n", i, nb);
 	usleep(philo->data->time_to_sleep * 1000);
 	return (0);

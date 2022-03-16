@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:10:37 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 07:01:46 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 09:26:58 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	get_forks(t_philo *philo, t_data *data, int nb)
 		return (-1);
 	}
 	printf("\033[1;35m%lld %d has taken a fork\033[0m\n", get_time(philo->time), nb);
-	pthread_mutex_lock(&data->fork[philo->fork_left]);
+	pthread_mutex_lock(&data->fork[philo->fork_left]); // ici ca marche pas
 	if (get_time(philo->time_last_meal) >= philo->data->time_to_die)
 	{
 		pthread_mutex_unlock(&data->fork[philo->fork_right]);
@@ -58,22 +58,12 @@ void	*fonction(void *arg)
 			return (NULL);
 		philo->nb_of_meal++;
 		if (get_forks(philo, philo->data, philo->nb) == -1)
-		{
-			printf("DEAD\n");
 			return (NULL);
-		}
 		if (philo_sleep(philo, philo->nb) == -1)
-		{
-			printf("DEAD\n");
 			return (NULL);
-		}
 		if (get_time(philo->time_last_meal) >= philo->data->time_to_die)
-		{
-			printf("DEAD\n");
-			printf("last meal = %lld\n", philo->time_last_meal);
 			return (NULL);
-		}
-		printf("\033[1;36m%lld %d is thinking\033[0m\n", get_time(philo->time), philo->nb);
+		// printf("\033[1;36m%lld %d is thinking\033[0m\n", get_time(philo->time), philo->nb);
 	}
 	return (philo);
 }
