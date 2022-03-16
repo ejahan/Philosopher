@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 00:31:06 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/15 06:32:54 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 06:04:54 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	philosophers(int ac, char **av, t_struct *all)
 	if (all->data.number_of_times_each_philosopher_must_eat == 0
 		&& all->data.exist == 1)
 		return (0);
-	all->philo = init_philo(&all->data);
+	all->philo = init_philo(all);
 	if (all->philo == NULL)
 		return (-1);
 	all->data.fork = malloc(sizeof(pthread_mutex_t) * all->data.number_of_philosophers);
@@ -35,6 +35,12 @@ int	philosophers(int ac, char **av, t_struct *all)
 		i++;
 	}
 	start_philo(all->data.number_of_philosophers, all);
+	i = 0;
+	while (i < all->data.number_of_philosophers)
+	{
+		pthread_mutex_destroy(&all->data.fork[i]);
+		i++;
+	}
 	free(all->philo);
 	return (0);
 }

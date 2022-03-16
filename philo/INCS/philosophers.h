@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/15 05:38:50 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 06:19:25 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ typedef struct s_data
 
 typedef struct s_philo
 {
-	pthread_t	thread;
-	int			nb;
-	int			fork_right;
-	int			fork_left;
-	long		time;
-	long		time_last_meal;
-	t_data		*data;
+	pthread_t			thread;
+	int					nb;
+	int					nb_of_meal;
+	int					fork_right;
+	int					fork_left;
+	long long int		time;
+	long long int		time_last_meal;
+	t_data				*data;
 }	t_philo;
 
 typedef struct s_struct
@@ -49,11 +50,14 @@ typedef struct s_struct
 	t_philo	*philo;
 }	t_struct;
 
-long	ft_atoi(const char *str);
-int		ft_isdigit(int c);
-void	*fonction(void *data);
-t_philo	*init_philo(t_data *data);
-void	parsing(int ac, char **av, t_data *data);
-void	start_philo(int nb, t_struct *all);
+long			ft_atoi(const char *str);
+int				ft_isdigit(int c);
+void			*fonction(void *data);
+t_philo			*init_philo(t_struct *all);
+void			parsing(int ac, char **av, t_data *data);
+void			start_philo(int nb, t_struct *all);
+long long int	get_time(long long int start_time);
+int				philo_eat(t_philo *philo, int nb);
+int				philo_sleep(t_philo *philo, int nb);
 
 #endif

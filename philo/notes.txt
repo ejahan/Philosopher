@@ -140,4 +140,4 @@ t_philo	->	*data
 
 
 
-
+printf("x	\033[0m -> %d\n", cub.x);

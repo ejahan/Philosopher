@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 01:05:22 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/10 00:41:33 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 06:19:08 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,15 @@ int	ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+long long int	get_time(long long int start_time)
+{
+	long long int	time;
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	time = t.tv_sec * 1000 + t.tv_usec / 1000;
+	time -= start_time;
+	return (time);
 }

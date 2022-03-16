@@ -6,21 +6,29 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 03:33:35 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/15 03:56:14 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 06:59:19 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/philosophers.h"
 
-void	philo_sleep(long time, long time_to_sleep, int nb)
+int	philo_sleep(t_philo *philo, int nb)
 {
-	printf("%ld %d is sleeping\n", time, nb);
-	usleep(time_to_sleep * 1000);
+	long long int	i;
+
+	i = get_time(philo->time);
+	printf("\033[1;34m%lld %d is sleeping\033[0m\n", i, nb);
+	usleep(philo->data->time_to_sleep * 1000);
+	return (0);
 }
 
-void	philo_eat(long time, long time_to_eat, t_philo *philo)
+int	philo_eat(t_philo *philo, int nb)
 {
-	printf("%ld %d is eating\n", time, philo->nb);
-	usleep(time_to_eat * 1000);
-	philo->time_last_meal = get_time(philo->time);
+	struct timeval	time;
+
+	printf("\033[1;32m%lld %d is eating\033[0m\n", get_time(philo->time), nb);
+	usleep(philo->data->time_to_eat * 1000);
+	gettimeofday(&time, NULL);
+	philo->time_last_meal = (time.tv_sec * 1000 + time.tv_usec / 1000);
+	return (0);
 }
