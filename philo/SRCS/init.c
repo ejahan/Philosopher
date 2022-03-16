@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:07:07 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 09:19:22 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 10:11:24 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ t_philo	*init_philo(t_struct *all)
 		philo[i].data = &all->data;
 		i++;
 	}
+	philo->data->death = 0;
 	return (philo);
 }

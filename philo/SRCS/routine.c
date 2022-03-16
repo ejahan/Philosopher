@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:10:37 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 09:26:58 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 10:41:59 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,22 @@
 int	get_forks(t_philo *philo, t_data *data, int nb)
 {
 	pthread_mutex_lock(&data->fork[philo->fork_right]);
-	if (get_time(philo->time_last_meal) >= philo->data->time_to_die)
+	printf("\033[1;35m%lld %d has taken a fork\033[0m\n",
+		get_time(philo->time), nb);
+	if (check_death_or_time(philo) == -1)
 	{
 		pthread_mutex_unlock(&data->fork[philo->fork_right]);
 		return (-1);
 	}
-	printf("\033[1;35m%lld %d has taken a fork\033[0m\n", get_time(philo->time), nb);
-	pthread_mutex_lock(&data->fork[philo->fork_left]); // ici ca marche pas
-	if (get_time(philo->time_last_meal) >= philo->data->time_to_die)
+	pthread_mutex_lock(&data->fork[philo->fork_left]);
+	if (check_death_or_time(philo) == -1)
 	{
 		pthread_mutex_unlock(&data->fork[philo->fork_right]);
 		pthread_mutex_unlock(&data->fork[philo->fork_left]);
 		return (-1);
 	}
-	printf("\033[1;35m%lld %d has taken a fork\033[0m\n", get_time(philo->time), nb);
+	printf("\033[1;35m%lld %d has taken a fork\033[0m\n",
+		get_time(philo->time), nb);
 	if (philo_eat(philo, nb) == -1)
 	{
 		pthread_mutex_unlock(&data->fork[philo->fork_right]);
@@ -49,7 +51,7 @@ void	*fonction(void *arg)
 	gettimeofday(&time, NULL);
 	philo->time = (time.tv_sec * 1000 + time.tv_usec / 1000);
 	philo->time_last_meal = (time.tv_sec * 1000 + time.tv_usec / 1000);
-	if (philo->nb %2 == 1)
+	if (philo->nb % 2 == 1)
 		usleep(3000);
 	while (1)
 	{
@@ -59,11 +61,14 @@ void	*fonction(void *arg)
 		philo->nb_of_meal++;
 		if (get_forks(philo, philo->data, philo->nb) == -1)
 			return (NULL);
+		if (check_death_or_time(philo) == -1)
+			return (NULL);
 		if (philo_sleep(philo, philo->nb) == -1)
 			return (NULL);
-		if (get_time(philo->time_last_meal) >= philo->data->time_to_die)
+		if (check_death_or_time(philo) == -1)
 			return (NULL);
-		// printf("\033[1;36m%lld %d is thinking\033[0m\n", get_time(philo->time), philo->nb);
+		printf("\033[1;36m%lld %d is thinking\033[0m\n",
+			get_time(philo->time), philo->nb);
 	}
 	return (philo);
 }

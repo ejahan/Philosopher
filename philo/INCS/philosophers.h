@@ -6,18 +6,18 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 06:19:25 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 10:16:17 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/time.h>
-#include <pthread.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
+# include <sys/time.h>
+# include <pthread.h>
 
 typedef struct s_data
 {
@@ -28,7 +28,8 @@ typedef struct s_data
 	int				time_to_sleep;
 	int				exist;
 	int				number_of_times_each_philosopher_must_eat;
-	pthread_t		death;
+	pthread_mutex_t	mutex_death;
+	int				death;
 	pthread_mutex_t	*fork;
 }	t_data;
 
@@ -59,5 +60,6 @@ void			start_philo(int nb, t_struct *all);
 long long int	get_time(long long int start_time);
 int				philo_eat(t_philo *philo, int nb);
 int				philo_sleep(t_philo *philo, int nb);
+int				check_death_or_time(t_philo *philo);
 
 #endif

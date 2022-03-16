@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 03:14:55 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/15 03:27:20 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 10:15:38 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	start_philo(int nb, t_struct *all)
 	i = 0;
 	while (i < nb)
 	{
-		if (pthread_create(&all->philo[i].thread, NULL, &fonction, &all->philo[i]) != 0)
+		if (pthread_create(&all->philo[i].thread, NULL,
+				&fonction, &all->philo[i]) != 0)
 			return ;
 		i++;
 	}

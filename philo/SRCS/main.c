@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 00:31:06 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 06:04:54 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/16 10:17:52 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	philosophers(int ac, char **av, t_struct *all)
 	all->philo = init_philo(all);
 	if (all->philo == NULL)
 		return (-1);
-	all->data.fork = malloc(sizeof(pthread_mutex_t) * all->data.number_of_philosophers);
+	all->data.fork
+		= malloc(sizeof(pthread_mutex_t) * all->data.number_of_philosophers);
 	if (all->data.fork == NULL)
 		return (-1);
 	while (i < all->data.number_of_philosophers)
@@ -34,6 +35,7 @@ int	philosophers(int ac, char **av, t_struct *all)
 		pthread_mutex_init(&all->data.fork[i], NULL);
 		i++;
 	}
+	pthread_mutex_init(&all->data.mutex_death, NULL);
 	start_philo(all->data.number_of_philosophers, all);
 	i = 0;
 	while (i < all->data.number_of_philosophers)
@@ -41,6 +43,7 @@ int	philosophers(int ac, char **av, t_struct *all)
 		pthread_mutex_destroy(&all->data.fork[i]);
 		i++;
 	}
+	pthread_mutex_destroy(&all->data.mutex_death);
 	free(all->philo);
 	return (0);
 }
