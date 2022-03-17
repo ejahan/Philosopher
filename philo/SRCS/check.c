@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/17 10:23:44 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 11:45:17 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 14:43:33 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_all_philo_meal(t_struct *all)
 	{
 		pthread_mutex_lock(&all->philo[i].mutex_nb_of_meal);
 		if (all->philo[i].nb_of_meal
-			!= all->data.number_of_times_each_philosopher_must_eat)
+			< all->data.number_of_times_each_philosopher_must_eat)
 		{
 			pthread_mutex_unlock(&all->philo[i].mutex_nb_of_meal);
 			return (0);
@@ -31,6 +31,9 @@ int	check_all_philo_meal(t_struct *all)
 		pthread_mutex_unlock(&all->philo[i].mutex_nb_of_meal);
 		i++;
 	}
+	pthread_mutex_lock(&all->data.mutex_enough);
+	all->data.enough = 1;
+	pthread_mutex_unlock(&all->data.mutex_enough);
 	return (1);
 }
 

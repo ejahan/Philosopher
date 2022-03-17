@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:07:07 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 11:43:08 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 15:23:41 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_philo	*init_philo(t_struct *all)
 	philo = malloc(sizeof(t_philo) * (all->data.number_of_philosophers));
 	if (philo == NULL)
 		return (NULL);
+	all->data.enough = 0;
 	while (i < all->data.number_of_philosophers)
 	{
 		philo[i].nb = i + 1;
@@ -31,9 +32,6 @@ t_philo	*init_philo(t_struct *all)
 		philo[i].fork_left = i;
 		philo[i].nb_of_meal = 0;
 		philo[i].data = &all->data;
-		// pthread_mutex_init(&philo[i].mutex_time, NULL);
-		// pthread_mutex_init(&philo[i].mutex_last_meal, NULL);
-		// pthread_mutex_init(&philo[i].mutex_nb_of_meal, NULL);
 		i++;
 	}
 	philo->data->death = 0;

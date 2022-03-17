@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 11:41:05 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 13:48:46 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct s_data
 	int				number_of_times_each_philosopher_must_eat;
 	pthread_mutex_t	mutex_death;
 	int				death;
+	pthread_mutex_t	mutex_enough;
+	int				enough;
 	pthread_mutex_t	*fork;
 	pthread_t		check_death;
 }	t_data;

@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 01:05:22 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 10:08:34 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 14:16:33 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,13 @@ long long int	get_time(long long int start_time)
 
 int	check_death_or_time(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->data->mutex_enough);
+	if (philo->data->enough == 1)
+	{
+		pthread_mutex_unlock(&philo->data->mutex_enough);
+		return (-1);
+	}
+	pthread_mutex_unlock(&philo->data->mutex_enough);
 	pthread_mutex_lock(&philo->data->mutex_death);
 	if (philo->data->death == 1)
 	{

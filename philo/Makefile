@@ -6,7 +6,7 @@
 #    By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/08 00:00:23 by ejahan            #+#    #+#              #
-#    Updated: 2022/03/17 10:52:00 by ejahan           ###   ########.fr        #
+#    Updated: 2022/03/17 15:28:47 by ejahan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ CC		=	clang
 
 RM		=	rm -rf
 
-CFLAGS	=	-Wall -Wextra -Werror -g3 -fsanitize=thread #-g3 -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g3 #-fsanitize=thread #-g3 -fsanitize=address
 
 all:		${NAME}
 
