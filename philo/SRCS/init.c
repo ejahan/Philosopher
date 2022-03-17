@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:07:07 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 15:23:41 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 15:53:04 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ t_philo	*init_philo(t_struct *all)
 	}
 	philo->data->death = 0;
 	return (philo);
+}
+
+void	init_time(t_philo *philo)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	philo->time = (time.tv_sec * 1000 + time.tv_usec / 1000);
+	pthread_mutex_lock(&philo->mutex_last_meal);
+	philo->time_last_meal = (time.tv_sec * 1000 + time.tv_usec / 1000);
+	pthread_mutex_unlock(&philo->mutex_last_meal);
 }

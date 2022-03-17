@@ -6,11 +6,26 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/10 06:10:37 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 15:20:32 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 16:04:35 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../INCS/philosophers.h"
+
+int	eat_unlock(t_philo *philo, t_data *data, int nb)
+{
+	if (philo_eat(philo, nb) == -1)
+	{
+		pthread_mutex_unlock(&data->fork[philo->fork_right]);
+		pthread_mutex_unlock(&data->fork[philo->fork_left]);
+		return (-1);
+	}
+	pthread_mutex_unlock(&data->fork[philo->fork_right]);
+	pthread_mutex_unlock(&data->fork[philo->fork_left]);
+	if (check_death_or_time(philo) == -1)
+		return (-1);
+	return (0);
+}
 
 int	get_forks(t_philo *philo, t_data *data, int nb)
 {
@@ -36,30 +51,15 @@ int	get_forks(t_philo *philo, t_data *data, int nb)
 	}
 	printf("\033[1;35m%lld %d has taken a fork\033[0m\n",
 		get_time(philo->time), nb);
-	if (philo_eat(philo, nb) == -1)
-	{
-		pthread_mutex_unlock(&data->fork[philo->fork_right]);
-		pthread_mutex_unlock(&data->fork[philo->fork_left]);
-		return (-1);
-	}
-	pthread_mutex_unlock(&data->fork[philo->fork_right]);
-	pthread_mutex_unlock(&data->fork[philo->fork_left]);
-	if (check_death_or_time(philo) == -1)
-		return (-1);
-	return (0);
+	return (eat_unlock(philo, data, nb));
 }
 
 void	*fonction(void *arg)
 {
 	t_philo			*philo;
-	struct timeval	time;
 
 	philo = (t_philo *)arg;
-	gettimeofday(&time, NULL);
-	philo->time = (time.tv_sec * 1000 + time.tv_usec / 1000);
-	pthread_mutex_lock(&philo->mutex_last_meal);
-	philo->time_last_meal = (time.tv_sec * 1000 + time.tv_usec / 1000);
-	pthread_mutex_unlock(&philo->mutex_last_meal);
+	init_time(philo);
 	if (philo->nb % 2 == 1)
 		usleep(3000);
 	while (1)

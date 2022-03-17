@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/17 13:48:46 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 15:53:17 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,6 @@ int				check_death_or_time(t_philo *philo);
 void			*check_death(void *arg);
 int				check_all_philo_meal(t_struct *all);
 int				check_philo_dead(t_struct *all, int i);
+void			init_time(t_philo *philo);
 
 #endif
