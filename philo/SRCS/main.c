@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/06 00:31:06 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 10:17:52 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 11:43:04 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ int	philosophers(int ac, char **av, t_struct *all)
 	while (i < all->data.number_of_philosophers)
 	{
 		pthread_mutex_init(&all->data.fork[i], NULL);
+		pthread_mutex_init(&all->philo[i].mutex_time, NULL);
+		pthread_mutex_init(&all->philo[i].mutex_last_meal, NULL);
+		pthread_mutex_init(&all->philo[i].mutex_nb_of_meal, NULL);
 		i++;
 	}
 	pthread_mutex_init(&all->data.mutex_death, NULL);
@@ -41,10 +44,14 @@ int	philosophers(int ac, char **av, t_struct *all)
 	while (i < all->data.number_of_philosophers)
 	{
 		pthread_mutex_destroy(&all->data.fork[i]);
+		pthread_mutex_destroy(&all->philo[i].mutex_time);
+		pthread_mutex_destroy(&all->philo[i].mutex_last_meal);
+		pthread_mutex_destroy(&all->philo[i].mutex_nb_of_meal);
 		i++;
 	}
 	pthread_mutex_destroy(&all->data.mutex_death);
 	free(all->philo);
+	free(all->data.fork);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 01:05:22 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 10:42:38 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 10:08:34 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,9 @@ long long int	get_time(long long int start_time)
 
 int	check_death_or_time(t_philo *philo)
 {
-	// if (philo->data->number_of_philosophers == 1)
-	// {
-	// 	printf("\033[1;31m%lld %d died\033[0m\n",
-	// 		get_time(philo->time), philo->nb);
-	// 	return (-1);
-	// }
 	pthread_mutex_lock(&philo->data->mutex_death);
 	if (philo->data->death == 1)
 	{
-		pthread_mutex_unlock(&philo->data->mutex_death);
-		return (-1);
-	}
-	if (get_time(philo->time_last_meal) >= philo->data->time_to_die)
-	{
-		philo->data->death = 1;
-		printf("\033[1;31m%lld %d died\033[0m\n",
-			get_time(philo->time), philo->nb);
 		pthread_mutex_unlock(&philo->data->mutex_death);
 		return (-1);
 	}

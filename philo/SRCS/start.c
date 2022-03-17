@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/15 03:14:55 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 10:15:38 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 09:02:22 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	start_philo(int nb, t_struct *all)
 			return ;
 		i++;
 	}
+	if (pthread_create(&all->data.check_death, NULL,
+			&check_death, &all->data) != 0)
+		return ;
 	i = 0;
 	while (i < nb)
 	{
@@ -31,4 +34,6 @@ void	start_philo(int nb, t_struct *all)
 			return ;
 		i++;
 	}
+	if (pthread_join(all->data.check_death, NULL) != 0)
+		return ;
 }

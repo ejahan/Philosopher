@@ -6,7 +6,7 @@
 /*   By: ejahan <ejahan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/08 00:09:58 by ejahan            #+#    #+#             */
-/*   Updated: 2022/03/16 10:16:17 by ejahan           ###   ########.fr       */
+/*   Updated: 2022/03/17 11:41:05 by ejahan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,20 @@ typedef struct s_data
 	pthread_mutex_t	mutex_death;
 	int				death;
 	pthread_mutex_t	*fork;
+	pthread_t		check_death;
 }	t_data;
 
 typedef struct s_philo
 {
 	pthread_t			thread;
 	int					nb;
+	pthread_mutex_t		mutex_nb_of_meal;
 	int					nb_of_meal;
 	int					fork_right;
 	int					fork_left;
+	pthread_mutex_t		mutex_time;
 	long long int		time;
+	pthread_mutex_t		mutex_last_meal;
 	long long int		time_last_meal;
 	t_data				*data;
 }	t_philo;
@@ -61,5 +65,8 @@ long long int	get_time(long long int start_time);
 int				philo_eat(t_philo *philo, int nb);
 int				philo_sleep(t_philo *philo, int nb);
 int				check_death_or_time(t_philo *philo);
+void			*check_death(void *arg);
+int				check_all_philo_meal(t_struct *all);
+int				check_philo_dead(t_struct *all, int i);
 
 #endif
